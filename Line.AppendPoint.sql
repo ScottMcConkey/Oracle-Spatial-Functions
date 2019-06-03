@@ -1,6 +1,9 @@
-function APPEND_POINT(p_line sdo_geometry, p_point sdo_geometry)
+  function APPEND_POINT(p_line sdo_geometry, p_point sdo_geometry)
   return sdo_geometry
   is
+    func_geometry_error exception;
+    pragma exception_init(func_geometry_error, -20001);
+  
     t_new_array mdsys.sdo_ordinate_array;
     t_new_geom sdo_geometry;
     t_count number;
@@ -16,7 +19,7 @@ function APPEND_POINT(p_line sdo_geometry, p_point sdo_geometry)
       raise_application_error(-20001, 'The Point must have an SDO_GTYPE of 2001 or 2002');
     end if;
     if p_point.sdo_gtype = '2002' and p_point.sdo_ordinates.exists(3) then
-      raise_application_error(-20002, 'The Point must not be a Line with more than 2 ordinates');
+      raise_application_error(-20001, 'The Point must not be a Line with more than 2 ordinates');
     end if;
     
     t_new_array := p_line.sdo_ordinates;
@@ -34,5 +37,5 @@ function APPEND_POINT(p_line sdo_geometry, p_point sdo_geometry)
     t_new_geom := sdo_geometry(p_line.sdo_gtype, p_line.sdo_srid, null, p_line.sdo_elem_info, t_new_array);
   
     return t_new_geom;
-
-end;
+    
+  end;
