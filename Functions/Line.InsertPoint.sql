@@ -68,11 +68,6 @@ begin
   -- Convert to Line Geometry
   t_new_line := SDO_GEOMETRY(2002, p_line.sdo_srid, null, p_line.sdo_elem_info, t_new_array);
   
-  -- Dump Output (for testing only)
-  for i in 1..t_new_array.count() loop
-    dbms_output.put_line(t_new_array(i));
-  end loop;
-  
   return t_new_line;
   
 end;
