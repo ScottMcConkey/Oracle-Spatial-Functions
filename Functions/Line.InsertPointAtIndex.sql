@@ -1,4 +1,4 @@
-function INSERT_POINT(p_line sdo_geometry, p_point sdo_geometry, p_idx number)
+function INSERT_POINT_AT_INDEX(p_line sdo_geometry, p_point sdo_geometry, p_idx number)
 return sdo_geometry
 is
   func_geometry_error exception;
