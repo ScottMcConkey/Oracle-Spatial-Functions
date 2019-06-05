@@ -31,8 +31,8 @@ begin
   if p_idx <= 0 then
     raise_application_error(-20001, 'Index must be greater than 0');
   end if;
-  if p_line.sdo_ordinates.count() / 2 < p_idx then
-    raise_application_error(-20001, 'Index out of range');
+  if p_line.sdo_ordinates.count() / 2  + 1 < p_idx then
+    raise_application_error(-20001, 'Index out of range. You may only specify an index up to 1 greater than the maximum');
   end if;
   
   -- Populate the Hashtable
