@@ -1,4 +1,23 @@
-function MERGE_POINT(p_line sdo_geometry, p_point sdo_geometry)
+/*******************************************************************************
+* LINE__MERGE_POINT()
+*   Merges a point into the SDO_ORDINATES of a Line based upon
+*   proximity  to the line.
+*
+*   1. A Point whose closest location on the Line matches the FIRST  
+*      coordinates of that Line is added to the beginning of the line.
+*   2. A Point whose closest location on the Line matches the FINAL 
+*      coordinates of that Line is added to the end of the line.
+*   3. A Point whose closest location on the Line is BETWEEN two other
+*      coordinates of that Line is added between the two, at the index of the
+*      latter, maintaining the rest of the Line behind it.
+*   4. A Point whose closest location on the Line MATCHES specific coordinates
+*      of that line is added after those coordinates, maintaining the rest of
+*      the line behind it.
+*
+* !!! You must include a copy of LINE__INSERT_POINT_AT_INDEX() or this
+* !!! Function will not work
+*******************************************************************************/
+function LINE__MERGE_POINT(p_line sdo_geometry, p_point sdo_geometry)
 return sdo_geometry
 is
   func_geometry_error exception;
@@ -46,15 +65,15 @@ begin
   
   -- Shift as Needed
   if t_point_dist = 0 then
-    t_result := INSERT_POINT_AT_INDEX(p_line, p_point, 1);
+    t_result := LINE__INSERT_POINT_AT_INDEX(p_line, p_point, 1);
   elsif t_point_dist = t_line_dist then
-    t_result := INSERT_POINT_AT_INDEX(p_line, p_point, (p_line.sdo_ordinates.count() / 2 + 1));
+    t_result := LINE__INSERT_POINT_AT_INDEX(p_line, p_point, (p_line.sdo_ordinates.count() / 2 + 1));
   else
     for i in 1..t_vertices.count() loop
       if t_point_dist > t_vertices(i).distance and t_point_dist < t_vertices(i + 1).distance then
-        t_result := INSERT_POINT_AT_INDEX(p_line, p_point, i + 1);
+        t_result := LINE__INSERT_POINT_AT_INDEX(p_line, p_point, i + 1);
       elsif t_point_dist = t_vertices(i).distance then
-        t_result := INSERT_POINT_AT_INDEX(p_line, p_point, i + 1);
+        t_result := LINE__INSERT_POINT_AT_INDEX(p_line, p_point, i + 1);
       end if;
     end loop;
   end if;

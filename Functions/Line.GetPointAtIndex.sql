@@ -1,4 +1,4 @@
-function GET_POINT_AT_INDEX(p_line sdo_geometry, p_idx pls_integer)
+function LINE__GET_POINT_AT_INDEX(p_line sdo_geometry, p_idx pls_integer)
 return sdo_geometry
 is
   func_geometry_error exception;

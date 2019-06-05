@@ -1,4 +1,4 @@
-function GET_INDEX_OF_POINT(p_line sdo_geometry, p_point sdo_geometry)
+function LINE__GET_INDEX_OF_POINT(p_line sdo_geometry, p_point sdo_geometry)
 return pls_integer --returns null if no result found
 is
   func_geometry_error exception;

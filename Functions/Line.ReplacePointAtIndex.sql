@@ -1,4 +1,4 @@
-function REPLACE_POINT_AT_INDEX(p_line sdo_geometry, p_idx number, p_point sdo_geometry)
+function LINE__REPLACE_POINT_AT_INDEX(p_line sdo_geometry, p_idx number, p_point sdo_geometry)
 return sdo_geometry
 is
   func_geometry_error exception;
