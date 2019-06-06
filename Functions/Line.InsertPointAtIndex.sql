@@ -20,11 +20,8 @@ begin
   end if;
   
   -- Validate Point
-  if p_point.sdo_gtype not in ('2001', '2002') then
-    raise_application_error(-20001, 'The Point must have an SDO_GTYPE of 2001 or 2002');
-  end if;
-  if p_point.sdo_gtype = '2002' and p_point.sdo_ordinates.exists(3) then
-    raise_application_error(-20001, 'The Point must not be a Line with more than 2 ordinates');
+  if p_point.sdo_gtype != '2001' then
+    raise_application_error(-20001, 'The Point must have an SDO_GTYPE of 2001');
   end if;
   
   -- Validate Index
