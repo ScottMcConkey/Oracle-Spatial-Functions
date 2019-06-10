@@ -1,8 +1,7 @@
 /*******************************************************************************
-* LINE__BREAK_AT_INDEX()
-*   
+* LINE__BREAK()
 *******************************************************************************/
-procedure LINE__BREAK_AT_INDEX(p_line sdo_geometry, p_idx pls_integer, r_line_1 out sdo_geometry, r_line_2 out sdo_geometry)
+procedure LINE__BREAK(p_line sdo_geometry, p_idx pls_integer, r_line_1 out sdo_geometry, r_line_2 out sdo_geometry)
 is
   func_geometry_error exception;
   pragma exception_init(func_geometry_error, -20001);

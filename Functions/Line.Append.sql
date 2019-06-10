@@ -1,4 +1,4 @@
-function LINE__APPEND_POINT(p_line sdo_geometry, p_point sdo_geometry)
+function LINE__APPEND(p_line sdo_geometry, p_point sdo_geometry)
 return sdo_geometry
 is
   func_geometry_error exception;

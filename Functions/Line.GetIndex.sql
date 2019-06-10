@@ -1,4 +1,4 @@
-function LINE__GET_INDEX_OF_POINT(p_line sdo_geometry, p_point sdo_geometry)
+function LINE__GET_INDEX(p_line sdo_geometry, p_point sdo_geometry)
 return pls_integer --returns null if no result found
 is
   func_geometry_error exception;
@@ -8,7 +8,6 @@ is
   type vertex_hashtable is table of vertex_pair index by pls_integer;
   t_vertices vertex_hashtable;
   t_index pls_integer := null;
-
 
 begin
 

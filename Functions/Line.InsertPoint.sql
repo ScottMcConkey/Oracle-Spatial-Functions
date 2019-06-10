@@ -1,4 +1,4 @@
-function LINE__INSERT_POINT_AT_INDEX(p_line sdo_geometry, p_point sdo_geometry, p_idx number)
+function LINE__INSERT_POINT(p_line sdo_geometry, p_point sdo_geometry, p_idx number)
 return sdo_geometry
 is
   func_geometry_error exception;
@@ -10,7 +10,6 @@ is
   t_new_vertices vertex_hashtable;
   t_new_array sdo_ordinate_array := sdo_ordinate_array();
   t_new_line sdo_geometry;
-
 
 begin
 
@@ -44,8 +43,7 @@ begin
     t_new_vertices(i).y := t_vertices(i).y;
   end loop;
   
-  
-  -- Insert (slow!)
+  -- Shift (slow!)
   for i in p_idx .. t_vertices.count() loop
     t_new_vertices(i + 1).x := t_vertices(i).x;
     t_new_vertices(i + 1).y := t_vertices(i).y;
@@ -62,7 +60,7 @@ begin
     t_new_array(t_new_array.count()) := t_new_vertices(i).y;
   end loop;
   
-  -- Convert to Line Geometry
+  -- Convert to Ordinate Array to Geometry
   t_new_line := SDO_GEOMETRY(2002, p_line.sdo_srid, null, p_line.sdo_elem_info, t_new_array);
   
   return t_new_line;

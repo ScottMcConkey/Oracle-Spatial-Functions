@@ -1,4 +1,4 @@
-function LINE__REPLACE_POINT_AT_INDEX(p_line sdo_geometry, p_idx number, p_point sdo_geometry)
+function LINE__REPLACE_POINT(p_line sdo_geometry, p_idx number, p_point sdo_geometry)
 return sdo_geometry
 is
   func_geometry_error exception;
@@ -9,7 +9,6 @@ is
   t_vertices vertex_hashtable;
   t_new_array sdo_ordinate_array := sdo_ordinate_array();
   t_new_line sdo_geometry;
-
 
 begin
 
