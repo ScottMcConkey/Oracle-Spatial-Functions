@@ -14,7 +14,7 @@
 *      of that line is added after those coordinates, maintaining the rest of
 *      the line behind it.
 *
-* !!! You must include a copy of LINE__INSERT_POINT_AT_INDEX() or this
+* !!! You must include a copy of LINE__INSERT_POINT() or this
 * !!! Function will not work
 *******************************************************************************/
 function LINE__MERGE_POINT(p_line sdo_geometry, p_point sdo_geometry)
@@ -59,15 +59,15 @@ begin
   
   -- Shift as Needed
   if t_point_dist = 0 then
-    t_result := LINE__INSERT_POINT_AT_INDEX(p_line, p_point, 1);
+    t_result := LINE__INSERT_POINT(p_line, p_point, 1);
   elsif t_point_dist = t_line_dist then
-    t_result := LINE__INSERT_POINT_AT_INDEX(p_line, p_point, (p_line.sdo_ordinates.count() / 2 + 1));
+    t_result := LINE__INSERT_POINT(p_line, p_point, (p_line.sdo_ordinates.count() / 2 + 1));
   else
     for i in 1..t_vertices.count() loop
       if t_point_dist > t_vertices(i).distance and t_point_dist < t_vertices(i + 1).distance then
-        t_result := LINE__INSERT_POINT_AT_INDEX(p_line, p_point, i + 1);
+        t_result := LINE__INSERT_POINT(p_line, p_point, i + 1);
       elsif t_point_dist = t_vertices(i).distance then
-        t_result := LINE__INSERT_POINT_AT_INDEX(p_line, p_point, i + 1);
+        t_result := LINE__INSERT_POINT(p_line, p_point, i + 1);
       end if;
     end loop;
   end if;
