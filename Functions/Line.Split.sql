@@ -1,7 +1,7 @@
 /*******************************************************************************
-* LINE__BREAK()
+* LINE__SPLIT()
 *******************************************************************************/
-procedure LINE__BREAK(p_line sdo_geometry, p_idx pls_integer, r_line_1 out sdo_geometry, r_line_2 out sdo_geometry)
+procedure LINE__SPLIT(p_line sdo_geometry, p_idx pls_integer, r_line_1 out sdo_geometry, r_line_2 out sdo_geometry)
 is
   func_geometry_error exception;
   pragma exception_init(func_geometry_error, -20001);
