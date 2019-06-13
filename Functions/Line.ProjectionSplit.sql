@@ -24,46 +24,46 @@ is
   t_lrs_line     sdo_geometry;
   t_sdo_point    sdo_geometry;
   
--- snagged and slightly modified from http://www.octopusfunda.com/2015/07/quick-sort-in-plsql.html
-procedure QUICK_SORT(arr in out number_array,first number,last number)
-IS
-  pivot number:=first;
-  i number:=first;
-  j number:=last;
-  temp number;
-BEGIN
-  while i<j loop
-    while arr (i) <= arr (pivot) loop
-      if i<last then 
-        i:=i+1;
+  -- snagged and slightly modified from http://www.octopusfunda.com/2015/07/quick-sort-in-plsql.html
+  procedure QUICK_SORT(arr in out number_array,first number,last number)
+  IS
+    pivot number:=first;
+    i number:=first;
+    j number:=last;
+    temp number;
+  BEGIN
+    while i<j loop
+      while arr (i) <= arr (pivot) loop
+        if i<last then 
+          i:=i+1;
+        else  
+          EXIT WHEN i>=last;
+        end if; 
+    end loop;
+    while arr(j) > arr(pivot) loop
+      if j>first then 
+        j:=j-1;
       else  
-        EXIT WHEN i>=last;
+        EXIT WHEN j<=first;
       end if; 
-  end loop;
-  while arr(j) > arr(pivot) loop
-    if j>first then 
-      j:=j-1;
-    else  
-      EXIT WHEN j<=first;
+    end loop;
+    if i<j then
+      temp := arr(i);
+      arr(i) := arr(j);
+      arr(j) :=temp;
+    elsif i>=j then
+      temp := arr(pivot);
+      arr(pivot) := arr(j);
+      arr(j) := temp;
+    end if;
+    end loop;
+    if j-1 > 1 then
+      QUICK_SORT(arr,1,j-1);
+    end if;
+    if  j+1 < last then
+      QUICK_SORT(arr,j+1,last); 
     end if; 
-  end loop;
-  if i<j then
-    temp := arr(i);
-    arr(i) := arr(j);
-    arr(j) :=temp;
-  elsif i>=j then
-    temp := arr(pivot);
-    arr(pivot) := arr(j);
-    arr(j) := temp;
-  end if;
-  end loop;
-  if j-1 > 1 then
-    QUICK_SORT(arr,1,j-1);
-  end if;
-  if  j+1 < last then
-    QUICK_SORT(arr,j+1,last); 
-  end if; 
-end QUICK_SORT;
+  end QUICK_SORT;
 
 begin
 
