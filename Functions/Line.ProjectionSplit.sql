@@ -9,7 +9,7 @@
 * !! of your anonymous block or this will not work
 *******************************************************************************/
 type geometry_array is varray(2147483647) of sdo_geometry;
-type number_array is varray(500) of number;
+type number_array is varray(2147483647) of number;
 
 
 function LINE__PROJECTION_SPLIT(p_line sdo_geometry, p_points geometry_array)
