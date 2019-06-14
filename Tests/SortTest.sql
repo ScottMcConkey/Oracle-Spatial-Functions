@@ -23,7 +23,19 @@ declare
     *******************************************************************************/
     type number_array is varray(500) of number;
     
-    -- snagged from http://www.octopusfunda.com/2015/07/quick-sort-in-plsql.html
+    function LINE__PROJECTION_SPLIT(p_line sdo_geometry, p_points geometry_array)
+    return geometry_array
+    is
+      func_geometry_error exception;
+      pragma exception_init(func_geometry_error, -20001);
+      type point_data is record (x number, y number, d number);
+      type point_table is table of point_data;
+      
+      t_distances    number_array := number_array();
+      t_lrs_line     sdo_geometry;
+      t_sdo_point    sdo_geometry;
+      
+          -- snagged from http://www.octopusfunda.com/2015/07/quick-sort-in-plsql.html
     PROCEDURE QUICK_SORT(arr in out number_array,first number,last number)
     IS
      pivot number:=first;
@@ -63,18 +75,6 @@ declare
         QUICK_SORT(arr,j+1,last); 
       end if; 
     END QUICK_SORT;
-    
-    function LINE__PROJECTION_SPLIT(p_line sdo_geometry, p_points geometry_array)
-    return geometry_array
-    is
-      func_geometry_error exception;
-      pragma exception_init(func_geometry_error, -20001);
-      type point_data is record (x number, y number, d number);
-      type point_table is table of point_data;
-      
-      t_distances    number_array := number_array();
-      t_lrs_line     sdo_geometry;
-      t_sdo_point    sdo_geometry;
     
     begin
     
